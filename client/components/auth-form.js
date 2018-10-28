@@ -4,6 +4,9 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 
+// INTERNAL IMPORTS
+import {auth} from '../store'
+
 // MATERIAL UI IMPORTS
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -14,11 +17,6 @@ import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 import Paper from '@material-ui/core/Paper'
 import withStyles from '@material-ui/core/styles/withStyles'
-
-// INTERNAL IMPORTS
-import {auth} from '../store'
-
-// MATERIAL UI STYLE
 const styles = theme => ({
   layout: {
     width: 'auto',

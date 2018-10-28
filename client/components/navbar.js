@@ -1,5 +1,5 @@
 // EXTERNAL IMPORTS
-import React, { Fragment } from 'react'
+import React, {Fragment} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
@@ -18,9 +18,10 @@ import {withStyles} from '@material-ui/core/styles'
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    paddingBottom: theme.spacing.unit * 5,
   },
   grow: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   homeButton: {
     marginLeft: -12,
@@ -31,8 +32,8 @@ const styles = theme => ({
   }
 })
 
-const Navbar = (props) => {
-  const { classes, handleClick, isLoggedIn } = props
+const Navbar = props => {
+  const {classes, handleClick, isLoggedIn} = props
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -41,29 +42,31 @@ const Navbar = (props) => {
             BOILERMAKER
           </Typography>
           {isLoggedIn ? (
-            <React.Fragment>
-            <IconButton
-              className={classes.homeButton}
-              color="inherit"
-              aria-label="home"
-            >
-              <Link to="/home" className={classes.link}>
-                <HomeIcon />
+            <Fragment>
+              <IconButton
+                className={classes.homeButton}
+                color="inherit"
+                aria-label="home"
+              >
+                <Link to="/home" className={classes.link}>
+                  <HomeIcon />
+                </Link>
+              </IconButton>
+              <Link to="/login" className={classes.link}>
+                <Button color="inherit" onClick={handleClick}>
+                  Logout
+                </Button>
               </Link>
-            </IconButton>
-            <Link to="/login" className={classes.link}>
-              <Button color="inherit" onClick={handleClick}>Logout</Button>
-            </Link>
-          </React.Fragment>
+            </Fragment>
           ) : (
-            <React.Fragment>
+            <Fragment>
               <Link to="/login" className={classes.link}>
                 <Button color="inherit">Login</Button>
               </Link>
               <Link to="/signup" className={classes.link}>
                 <Button color="inherit">Signup</Button>
               </Link>
-          </React.Fragment>
+            </Fragment>
           )}
         </Toolbar>
       </AppBar>
