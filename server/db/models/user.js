@@ -3,6 +3,18 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const User = db.define('user', {
+  firstName: {
+    type: Sequelize.STRING,
+    defaultValue: 'Jane'
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    defaultValue: 'Doe'
+  },
+  imageUrl: {
+    type: Sequelize.STRING,
+    defaultValue: 'https://www.improvutopia.com/wp-content/uploads/2016/02/empty.png.jpeg'
+  },
   email: {
     type: Sequelize.STRING,
     unique: true,

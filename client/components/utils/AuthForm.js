@@ -5,11 +5,10 @@ import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 // INTERNAL IMPORTS
-import {auth} from '../store'
+import {auth} from '../../store'
 
 // MATERIAL UI IMPORTS
 import Button from '@material-ui/core/Button'
-import CssBaseline from '@material-ui/core/CssBaseline'
 import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
@@ -17,12 +16,9 @@ import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 import Paper from '@material-ui/core/Paper'
 import withStyles from '@material-ui/core/styles/withStyles'
+
 const styles = theme => ({
   layout: {
-    width: 'auto',
-    display: 'block', // Fix IE 11 issue.
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
     [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
       width: 400,
       marginLeft: 'auto',
@@ -52,7 +48,9 @@ const styles = theme => ({
     marginTop: theme.spacing.unit
   },
   submit: {
-    marginTop: theme.spacing.unit * 3
+    marginTop: theme.spacing.unit * 3,
+    fontWeight: 300,
+    letterSpacing: theme.spacing.unit * 1 / 4
   },
   error: {
     padding: `${theme.spacing.unit * 2}px`,
@@ -78,7 +76,6 @@ const AuthForm = props => {
 
   return (
     <React.Fragment>
-      <CssBaseline />
       <main className={classes.layout}>
         {error &&
           error.response && (
@@ -130,7 +127,7 @@ const AuthForm = props => {
             {' '}
             {displayName === 'Sign Up'
               ? 'Already have an account?'
-              : 'New to Boilermaker?'}{' '}
+              : "New to Boilermaker ?"}{' '}
             &nbsp;{' '}
           </p>
           <Link
@@ -149,7 +146,7 @@ const mapLogin = state => {
   return {
     name: 'login',
     displayName: 'Login',
-    error: state.user.error
+    error: state.user.currentUser.error
   }
 }
 
@@ -157,7 +154,7 @@ const mapSignup = state => {
   return {
     name: 'signup',
     displayName: 'Sign Up',
-    error: state.user.error
+    error: state.user.currentUser.error
   }
 }
 
@@ -168,7 +165,6 @@ const mapDispatch = dispatch => {
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      console.log('EMAIL, PASSWORD, FORMNAME', email, password, formName)
       dispatch(auth(email, password, formName))
     }
   }
