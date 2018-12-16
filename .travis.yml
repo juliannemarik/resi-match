@@ -16,12 +16,12 @@ install:
 before_script:
   - psql -c 'create database "resi-match-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 
-# before_deploy:
-#   - npm run build-client # make the bundle
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+before_deploy:
+  - npm run build-client # make the bundle
+  - rm -rf node_modules # omit from the tarball, since we skip cleanup
+deploy:
+  skip_cleanup: true # prevents travis from deleting the build
+  provider: heroku
+  app: resi-match # see README
+  api_key:
+    secure: moca50+fbHoj8RvGX4RBvcqj+kJh2OXuVkLApRCwQAns1sHql3cR45PiV8KAq3TvYdkqU0Zol0LGhx3XLutAGlMrHInzSG9zQvS6wdkUBIc2Aw4BBuCjgrFpjVdm+0oIxcL/IpqnOzkqMyAuLhIYU0Gg3B7Nq4WvGgqmD0lY13Y2sQpyxAoht80RsAAGtkTpI6oulKVBOhPJ4zW/rY1u7yWVOZZ8AD9W78N27GQW3ICkAiSxCRXWw1j2ptSMG0ihIqlhf2e2o28prqRu+/ipiA+O/19loCZk0cHJdEkqqrvrMj4N86mB0xl0xCp71lfgko0ItRUpW4WoLGP5EHwYntZcqG0YwBRHzBwd33Jtq2EOw/yZYLSOaTL+GITHdMdBN8dJT/dS3UzJUwmdBB13LKj++Zixtn6V8sYGPsDoTeRBkTfwdLPIzRzuIJPjaj8vZ5fF48KUppnSm7hbu8YR9Xg1sq5hLHSOs+N/OgdMNy9/xFFNitDN6EfOPLmWzsN6zd/vIX6Pf3zFDV0Nv4o9tVPYOjPJOpdpDwpRIFbY9D0QlYtMobDrVAG+wcqAcKZdXK8ZGJsAO/cQJOVmRc1kKvceQn7oTwnNTA7knGIGnxS3MuWRTwLDoRupG3/SIISdNOeP1l1ub5BqARs+5R0H1CwQ1g89ecqsfknllpN9JPg= # see README
