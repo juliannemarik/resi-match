@@ -1,7 +1,7 @@
 {
-  "name": "boilermaker",
+  "name": "resi-match",
   "version": "1.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "an application to help medical students rank their residency options!",
   "engines": {
     "node": ">= 7.0.0"
   },

@@ -47,6 +47,7 @@ const styles = theme => ({
     letterSpacing: theme.spacing.unit * 1 / 4
   },
   appBar: {
+    boxShadow: 'none',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
@@ -65,7 +66,7 @@ class Navbar extends Component {
         <AppBar position="static" className={classes.appBar}>
           <Toolbar>
             <Link to="/" className={classes.navLinks}>
-              <img className={classes.logo} src="/logo.png" />
+              <img className={classes.logo} src="https://images.vexels.com/media/users/3/151981/isolated/preview/f8863741dba8034b3e1d4809a01c782a-stethoscope-icon-medical-icons-by-vexels.png" />
             </Link>
             <Link to="/" className={classes.navLinks}>
               <Typography
@@ -74,7 +75,7 @@ class Navbar extends Component {
                 color="inherit"
                 noWrap
               >
-                BOILERMAKER
+                RESI MATCH
               </Typography>
             </Link>
             <div className={classes.grow} />

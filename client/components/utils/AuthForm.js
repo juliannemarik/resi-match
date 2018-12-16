@@ -127,7 +127,7 @@ const AuthForm = props => {
             {' '}
             {displayName === 'Sign Up'
               ? 'Already have an account?'
-              : "New to Boilermaker ?"}{' '}
+              : "New to Resi-Match ?"}{' '}
             &nbsp;{' '}
           </p>
           <Link
