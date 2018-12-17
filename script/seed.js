@@ -8,17 +8,13 @@ async function seed() {
   console.log('db synced!')
 
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({firstName: 'Julianne', lastName: 'Crawford', email: 'julianne.marik@gmail.com', imageUrl: 'https://media.licdn.com/dms/image/C5603AQGfbDyRLQO6jQ/profile-displayphoto-shrink_800_800/0?e=1550707200&v=beta&t=2SFa6RHddKIIfn5-4UBpMTJGxyO7qprpPW1A64qq0-Q', password: '1b10a0b474027a053317957c4a0c3f0c70eb851c9a3fc1d95dfbdf6a7987c308', salt: 'k3fmFaQkkQ69YBOMxy+R8w=='}),
   ])
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 }
 
-// We've separated the `seed` function from the `runSeed` function.
-// This way we can isolate the error handling and exit trapping.
-// The `seed` function is concerned only with modifying the database.
 async function runSeed() {
   console.log('seeding...')
   try {
@@ -33,12 +29,8 @@ async function runSeed() {
   }
 }
 
-// Execute the `seed` function, IF we ran this module directly (`node seed`).
-// `Async` functions always return a promise, so we can use `catch` to handle
-// any errors that might occur inside of `seed`.
 if (module === require.main) {
   runSeed()
 }
 
-// we export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed
