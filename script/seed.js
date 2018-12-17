@@ -1,8 +1,7 @@
 'use strict'
 const db = require('../server/db')
-const {userData, schoolData} = require('./seed-data')
-const {User} = require('../server/db/models')
-const {School} = require('../server/db/models')
+const {userData, schoolData, listData} = require('./seed-data')
+const {User, School, List} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -10,23 +9,27 @@ async function seed() {
 
   const userPromise = User.bulkCreate(userData, {returning: true})
   const schoolPromise = School.bulkCreate(schoolData, {returning: true})
+  const listPromise = List.bulkCreate(listData, {returning: true})
 
-  await Promise.all([userPromise, schoolPromise])
+  await Promise.all([userPromise, schoolPromise, listPromise])
 
   const cati = await User.findOne({
     where: {
       firstName: 'Cati'
     }
   })
+  const lists = await List.findAll()
   const schools = await School.findAll()
 
-  async function seedUserSchools() {
+  async function seedCati() {
     for (let i = 0; i < schools.length; i++) {
       await schools[i].setUsers(cati)
     }
+    await lists[0].setUser(cati)
     return schools
   }
-  await seedUserSchools()
+  await seedCati()
+
 
   await db.sync()
   console.log(`seeded successfully`)
