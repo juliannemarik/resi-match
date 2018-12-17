@@ -11,12 +11,11 @@ import Typography from '@material-ui/core/Typography'
 import {withStyles} from '@material-ui/core/styles'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import Button from '@material-ui/core/Button'
-import MenuIcon from '@material-ui/icons/Menu'
 import FormatListNumbered from '@material-ui/icons/FormatListNumbered'
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: '100%'
   },
   grow: {
     flexGrow: 1
@@ -65,7 +64,10 @@ class Navbar extends Component {
         <AppBar position="static" className={classes.appBar}>
           <Toolbar>
             <Link to="/" className={classes.navLinks}>
-              <img className={classes.logo} src="https://images.vexels.com/media/users/3/151981/isolated/preview/f8863741dba8034b3e1d4809a01c782a-stethoscope-icon-medical-icons-by-vexels.png" />
+              <img
+                className={classes.logo}
+                src="https://images.vexels.com/media/users/3/151981/isolated/preview/f8863741dba8034b3e1d4809a01c782a-stethoscope-icon-medical-icons-by-vexels.png"
+              />
             </Link>
             <Link to="/" className={classes.navLinks}>
               <Typography
@@ -78,45 +80,24 @@ class Navbar extends Component {
               </Typography>
             </Link>
             <div className={classes.grow} />
-            {!isAdmin ? (
+            {isLoggedIn ? (
               <React.Fragment>
                 <Link to="/list" className={classes.navLinks}>
                   <IconButton color="inherit" className={classes.icon}>
                     <FormatListNumbered />
                   </IconButton>
                 </Link>
-              </React.Fragment>
-            ) : (
-              <div />
-            )}
-            {isLoggedIn ? (
-              <div>
-                {!isAdmin ? (
-                  <Link to="/user" className={classes.navLinks}>
-                    <IconButton color="inherit" className={classes.icon}>
-                      <AccountCircle />
-                    </IconButton>
-                  </Link>
-                ) : (
-                  <div />
-                )}
+                <Link to="/user" className={classes.navLinks}>
+                  <IconButton color="inherit" className={classes.icon}>
+                    <AccountCircle />
+                  </IconButton>
+                </Link>
                 <a href="#" onClick={handleClick} className={classes.navLinks}>
                   <Button color="inherit" className={classes.navLinkText}>
                     Logout
                   </Button>
                 </a>
-                {isAdmin ? (
-                  <IconButton
-                    color="inherit"
-                    aria-label="Open drawer"
-                    onClick={this.toggleDrawer('right', true)}
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                ) : (
-                  <div />
-                )}
-              </div>
+              </React.Fragment>
             ) : (
               <div>
                 <Link to="/login" className={classes.navLinks}>
@@ -141,7 +122,7 @@ class Navbar extends Component {
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.currentUser.id,
-    user: state.user.currentUser,
+    user: state.user.currentUser
   }
 }
 

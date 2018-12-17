@@ -1,17 +1,38 @@
 'use strict'
 
 const db = require('../server/db')
+const {userData, schoolData} = require('./seed-data')
+
 const {User} = require('../server/db/models')
+const {School} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
+  const userPromise = User.bulkCreate(userData, {returning: true})
+  const schoolPromise = School.bulkCreate(schoolData, {returning: true})
 
-  const users = await Promise.all([
-    User.create({firstName: 'Julianne', lastName: 'Crawford', email: 'julianne.marik@gmail.com', imageUrl: 'https://media.licdn.com/dms/image/C5603AQGfbDyRLQO6jQ/profile-displayphoto-shrink_800_800/0?e=1550707200&v=beta&t=2SFa6RHddKIIfn5-4UBpMTJGxyO7qprpPW1A64qq0-Q', password: '1b10a0b474027a053317957c4a0c3f0c70eb851c9a3fc1d95dfbdf6a7987c308', salt: 'k3fmFaQkkQ69YBOMxy+R8w=='}),
+  await Promise.all([
+    userPromise, schoolPromise
   ])
 
-  console.log(`seeded ${users.length} users`)
+  const cati = await User.findOne({
+    where: {
+      firstName: 'Cati'
+    }
+  })
+  const schools = await School.findAll()
+
+  async function seedUserSchools() {
+    for (let i = 0; i < schools.length; i++) {
+      await schools[i].setUsers(cati)
+    }
+    return schools
+  }
+  await seedUserSchools()
+
+
+  await db.sync()
   console.log(`seeded successfully`)
 }
 
@@ -34,3 +55,4 @@ if (module === require.main) {
 }
 
 module.exports = seed
+

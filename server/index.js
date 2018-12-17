@@ -70,6 +70,11 @@ const createApp = () => {
     }
   })
 
+  // SENDS INDEX.HTML
+  app.use('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public/index.html'))
+  })
+
   // ERROR HANDLING ENDWARE
   app.use((err, req, res, next) => {
     console.error(err)
@@ -79,9 +84,7 @@ const createApp = () => {
 }
 
 const startListening = () => {
-  app.listen(PORT, () =>
-    console.log(`Mixing it up on port ${PORT}`)
-  )
+  app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
 }
 
 const syncDb = () => db.sync()
