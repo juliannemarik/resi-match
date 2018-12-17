@@ -1,14 +1,13 @@
 'use strict'
-
 const db = require('../server/db')
 const {userData, schoolData} = require('./seed-data')
-
 const {User} = require('../server/db/models')
 const {School} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
+
   const userPromise = User.bulkCreate(userData, {returning: true})
   const schoolPromise = School.bulkCreate(schoolData, {returning: true})
 
