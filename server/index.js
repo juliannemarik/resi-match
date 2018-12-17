@@ -9,26 +9,15 @@ const db = require('./db')
 const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
-const socketio = require('socket.io')
 module.exports = app
 
-// This is a global Mocha hook, used for resource cleanup.
-// Otherwise, Mocha v4+ never quits after tests.
 if (process.env.NODE_ENV === 'test') {
   after('close the session store', () => sessionStore.stopExpiringSessions())
 }
 
-/**
- * In your development environment, you can keep all of your
- * app's secret API keys in a file called `secrets.js`, in your project
- * root. This file is included in the .gitignore - it will NOT be tracked
- * or show up on Github. On your production server, you can add these
- * keys as environment variables, so that they can still be read by the
- * Node process on process.env
- */
 if (process.env.NODE_ENV !== 'production') require('../secrets')
 
-// passport registration
+// PASSPORT REGISTRATION
 passport.serializeUser((user, done) => done(null, user.id))
 
 passport.deserializeUser(async (id, done) => {
@@ -41,17 +30,17 @@ passport.deserializeUser(async (id, done) => {
 })
 
 const createApp = () => {
-  // logging middleware
+  // LOGGING MIDDLEWARE
   app.use(morgan('dev'))
 
-  // body parsing middleware
+  // BODY PARSING MIDDLEWARE
   app.use(express.json())
   app.use(express.urlencoded({extended: true}))
 
-  // compression middleware
+  // COMPRESSION MIDDLEWARE
   app.use(compression())
 
-  // session middleware with passport
+  // SESSION MIDDLEWARE W/PASSPORT
   app.use(
     session({
       secret: process.env.SESSION_SECRET || 'my best friend is Cody',
@@ -63,14 +52,14 @@ const createApp = () => {
   app.use(passport.initialize())
   app.use(passport.session())
 
-  // auth and api routes
+  // AUTH & API ROUTES
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
 
-  // static file-serving middleware
+  // STATIC FILE-SERVING MIDDLEWARE
   app.use(express.static(path.join(__dirname, '..', 'public')))
 
-  // any remaining requests with an extension (.js, .css, etc.) send 404
+  // ANY REMAINING REQUESTS SEND 404
   app.use((req, res, next) => {
     if (path.extname(req.path).length) {
       const err = new Error('Not found')
@@ -81,12 +70,7 @@ const createApp = () => {
     }
   })
 
-  // sends index.html
-  app.use('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public/index.html'))
-  })
-
-  // error handling endware
+  // ERROR HANDLING ENDWARE
   app.use((err, req, res, next) => {
     console.error(err)
     console.error(err.stack)
@@ -95,11 +79,9 @@ const createApp = () => {
 }
 
 const startListening = () => {
-  const server = app.listen(PORT, () =>
+  app.listen(PORT, () =>
     console.log(`Mixing it up on port ${PORT}`)
   )
-  const io = socketio(server)
-  require('./socket')(io)
 }
 
 const syncDb = () => db.sync()
@@ -110,10 +92,7 @@ async function bootApp() {
   await createApp()
   await startListening()
 }
-// This evaluates as true when this file is run directly from the command line,
-// i.e. when we say 'node server/index.js' (or 'nodemon server/index.js', or 'nodemon server', etc)
-// It will evaluate false when this module is required by another module - for example,
-// if we wanted to require our app in a test spec
+
 if (require.main === module) {
   bootApp()
 } else {

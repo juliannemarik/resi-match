@@ -3,7 +3,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import {Router} from 'react-router-dom'
-import './socket'
 
 // MATERIAL UI IMPORTS
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -19,7 +18,7 @@ const theme = createMuiTheme({
       main: '#424242'
     },
     secondary: {
-      main: '#1e88e5'
+      main: '#87C6E6'
     },
   },
   status: {
