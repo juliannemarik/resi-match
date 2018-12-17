@@ -11,9 +11,7 @@ async function seed() {
   const userPromise = User.bulkCreate(userData, {returning: true})
   const schoolPromise = School.bulkCreate(schoolData, {returning: true})
 
-  await Promise.all([
-    userPromise, schoolPromise
-  ])
+  await Promise.all([userPromise, schoolPromise])
 
   const cati = await User.findOne({
     where: {
@@ -29,7 +27,6 @@ async function seed() {
     return schools
   }
   await seedUserSchools()
-
 
   await db.sync()
   console.log(`seeded successfully`)
@@ -54,4 +51,3 @@ if (module === require.main) {
 }
 
 module.exports = seed
-
