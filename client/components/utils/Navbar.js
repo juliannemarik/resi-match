@@ -13,6 +13,7 @@ import AppIcon from '@material-ui/icons/Apps'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import Button from '@material-ui/core/Button'
 import MenuIcon from '@material-ui/icons/Menu'
+import FormatListNumbered from '@material-ui/icons/FormatListNumbered'
 
 const styles = theme => ({
   root: {
@@ -81,9 +82,9 @@ class Navbar extends Component {
             <div className={classes.grow} />
             {!isAdmin ? (
               <React.Fragment>
-                <Link to="/products" className={classes.navLinks}>
+                <Link to="/list" className={classes.navLinks}>
                   <IconButton color="inherit" className={classes.icon}>
-                    <AppIcon />
+                    <FormatListNumbered />
                   </IconButton>
                 </Link>
               </React.Fragment>
