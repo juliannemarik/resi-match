@@ -1,6 +1,5 @@
 import React from 'react'
 import UserProfile from './UserProfile'
-// import OrderHistory from './OrderHistory'
 import UserSettings from './UserSettings'
 
 // MATERIAL UI IMPORTS

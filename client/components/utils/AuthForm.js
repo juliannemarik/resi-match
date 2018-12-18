@@ -154,7 +154,7 @@ const mapSignup = state => {
   return {
     name: 'signup',
     displayName: 'Sign Up',
-    error: state.user.currentUser.error
+    error: state.user.currentUser.info.error
   }
 }
 

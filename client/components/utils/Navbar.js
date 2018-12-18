@@ -58,7 +58,7 @@ class Navbar extends Component {
   componentDidMount() {}
 
   render() {
-    const {classes, handleClick, isLoggedIn, isAdmin} = this.props
+    const {classes, handleClick, isLoggedIn} = this.props
     return (
       <div className={classes.root}>
         <AppBar position="static" className={classes.appBar}>
@@ -121,8 +121,8 @@ class Navbar extends Component {
 
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.currentUser.id,
-    user: state.user.currentUser
+    isLoggedIn: !!state.user.currentUser.info.id,
+    user: state.user.currentUser.info
   }
 }
 

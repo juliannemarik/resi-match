@@ -32,7 +32,7 @@ const schoolData = [
 ]
 
 const listData = [
-  {schools: ['UCSF', 'Mount Sinai', 'University of Chicago', 'Northwestern University', 'Cornell Univerity', 'UCLA', 'University of Colorado']}
+  {schools: [{name: 'UCSF', score: 10}, {name: 'Mount Sinai', score: 8}, {name: 'University of Chicago', score: 6}, {name: 'Northwestern University', score: 5}, {name: 'Cornell Univerity', score: 2}, {name: 'UCLA', score: 1}, {name: 'University of Colorado', score: 0}]}
 ]
 
 

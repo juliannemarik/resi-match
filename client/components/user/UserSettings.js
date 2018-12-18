@@ -135,7 +135,7 @@ class Settings extends Component {
 
 const mapState = state => {
   return {
-    user: state.user.currentUser
+    user: state.user.currentUser.info
   }
 }
 

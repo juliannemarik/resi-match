@@ -7,8 +7,9 @@ const REMOVE_USER = 'REMOVE_USER'
 
 // INITIAL STATE
 const defaultState = {
-  currentUser: {},
-  allUsers: []
+  currentUser: {
+    info: {},
+  }
 }
 
 // ACTION CREATORS
@@ -19,7 +20,7 @@ const removeUser = () => ({type: REMOVE_USER})
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    dispatch(getUser(res.data || defaultState.currentUser))
+    dispatch(getUser(res.data || defaultState.currentUser.info))
   } catch (err) {
     console.error(err)
   }
@@ -59,10 +60,10 @@ export const updateMe = userData => async dispatch => {
 // HANDLERS
 const handler = {
   [GET_USER]: (state, action) => {
-    return {...state, currentUser: action.user}
+    return {...state, currentUser: {info: action.user}}
   },
   [REMOVE_USER]: (state, action) => {
-    return {...state, currentUser: {}}
+    return {...state, currentUser: {info: {}}}
   }
 }
 

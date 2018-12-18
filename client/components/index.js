@@ -4,4 +4,8 @@ export {Login, Signup} from './utils/AuthForm'
 export {default as UserAccount} from './user/UserAccount'
 export {default as UserProfile} from './user/UserProfile'
 export {default as UserSettings} from './user/UserSettings'
+export {default as CurrentList} from './lists/CurrentList'
+export {default as ListView} from './lists/ListView'
+export {default as Schools} from './lists/Schools'
+export {default as Welcome} from './utils/Welcome'
 
